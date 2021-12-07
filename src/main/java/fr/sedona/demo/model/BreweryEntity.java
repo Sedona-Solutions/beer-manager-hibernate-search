@@ -1,19 +1,25 @@
 package fr.sedona.demo.model;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Brewery entity
  */
 @Entity(name="Brewery")
+@Indexed
 public class BreweryEntity extends PanacheEntity {
 
+    @FullTextField
     private String name;
 
+    @KeywordField
     @Enumerated(EnumType.STRING)
     private BreweryType type;
 
