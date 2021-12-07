@@ -1,0 +1,41 @@
+version: '3.6'
+services:
+  mariadb:
+    image: mariadb:10.5
+    command: [ "mysqld", "--lower_case_table_names=1", "--innodb-flush-method=fsync" ]
+    hostname: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=beers
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+      - ./init/mariadb:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    networks:
+      - default
+  elasticsearch:
+    image: elasticsearch:7.8.0
+    hostname: elasticsearch
+    environment:
+      - discovery.type=single-node
+    volumes:
+      - ./data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+      - 9300:9300
+    networks:
+      - default
+  kibana:
+    image: kibana:7.8.0
+    hostname: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    networks:
+      - default
+    depends_on:
+      - elasticsearch
+networks:
+  default: {}
