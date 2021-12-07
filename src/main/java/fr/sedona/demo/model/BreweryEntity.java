@@ -1,4 +1,4 @@
-package fr.sedona.elastic.demo.model;
+package fr.sedona.demo.model;
 
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
@@ -12,7 +12,7 @@ import javax.persistence.Enumerated;
 /**
  * Brewery entity
  */
-@Entity(name = "Brewery")
+@Entity(name="Brewery")
 @Indexed
 public class BreweryEntity extends PanacheEntity {
 
