@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Resource for beers
  */
-@Path("/beer")
+@Path("/beers")
 public class BeerResource {
 
     private BeerRepository beerRepository;
