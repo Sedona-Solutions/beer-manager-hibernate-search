@@ -1,6 +1,5 @@
 package fr.sedona.elastic.demo.resource;
 
-import fr.sedona.elastic.demo.model.BeerEntity;
 import fr.sedona.elastic.demo.model.dto.BeerDTO;
 import fr.sedona.elastic.demo.model.mapper.BeerMapper;
 import fr.sedona.elastic.demo.repository.BeerRepository;
@@ -21,8 +20,8 @@ import java.util.stream.Collectors;
 @Path("/beers")
 public class BeerResource {
 
-    private BeerRepository beerRepository;
-    private BeerMapper beerMapper;
+    private final BeerRepository beerRepository;
+    private final BeerMapper beerMapper;
     private final BeerSearchService searchService;
 
     @Inject
