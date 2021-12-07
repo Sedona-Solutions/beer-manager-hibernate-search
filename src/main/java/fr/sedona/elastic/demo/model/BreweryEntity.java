@@ -1,4 +1,4 @@
-package fr.sedona.demo.model;
+package fr.sedona.elastic.demo.model;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

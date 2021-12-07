@@ -1,4 +1,4 @@
-package fr.sedona.demo.resource;
+package fr.sedona.elastic.demo.resource;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.is;

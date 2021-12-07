@@ -1,4 +1,4 @@
-package fr.sedona.demo.resource;
+package fr.sedona.elastic.demo.resource;
 
 import java.util.List;
 
@@ -9,8 +9,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-import fr.sedona.demo.model.BeerEntity;
-import fr.sedona.demo.repository.BeerRepository;
+import fr.sedona.elastic.demo.model.BeerEntity;
+import fr.sedona.elastic.demo.repository.BeerRepository;
 
 /**
  * Resource for beers

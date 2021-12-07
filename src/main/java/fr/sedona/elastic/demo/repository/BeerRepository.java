@@ -1,8 +1,8 @@
-package fr.sedona.demo.repository;
+package fr.sedona.elastic.demo.repository;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import fr.sedona.demo.model.BeerEntity;
+import fr.sedona.elastic.demo.model.BeerEntity;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 
 /**
