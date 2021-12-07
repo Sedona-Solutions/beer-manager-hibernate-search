@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ step-2-add-search-service ]
+    branches: [ step-3-autocomplete-brewery ]
   pull_request:
-    branches: [ step-2-add-search-service ]
+    branches: [ step-3-autocomplete-brewery ]
 
 jobs:
   build:
