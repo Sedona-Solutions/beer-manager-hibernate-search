@@ -1,4 +1,4 @@
-![Build status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+![Build status](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/main.yml/badge.svg)
 
 # beer-manager-hibernate-search Project
 
