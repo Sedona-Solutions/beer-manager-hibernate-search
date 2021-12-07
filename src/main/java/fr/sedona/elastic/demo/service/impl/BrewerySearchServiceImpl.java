@@ -1,0 +1,39 @@
+package fr.sedona.elastic.demo.service.impl;
+
+import fr.sedona.elastic.demo.model.BreweryEntity;
+import fr.sedona.elastic.demo.model.dto.BreweryDTO;
+import fr.sedona.elastic.demo.model.mapper.BeerMapper;
+import fr.sedona.elastic.demo.service.BrewerySearchService;
+import org.hibernate.search.mapper.orm.session.SearchSession;
+import org.mapstruct.factory.Mappers;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+import java.util.List;
+import java.util.stream.Collectors;
+
+/**
+ * Default implementation of brewery search service
+ */
+@ApplicationScoped
+public class BrewerySearchServiceImpl implements BrewerySearchService {
+
+    private final SearchSession searchSession;
+    private final BeerMapper mapper;
+
+    @Inject
+    public BrewerySearchServiceImpl(SearchSession searchSession) {
+        this.searchSession = searchSession;
+        this.mapper = Mappers.getMapper(BeerMapper.class);
+    }
+
+    @Override
+    public List<BreweryDTO> autocompleteByName(String nameQuery) {
+        return searchSession.search(BreweryEntity.class)
+                .where(f -> f.match().field("nameAutocomplete").matching(nameQuery))
+                .fetchHits(10)
+                .stream()
+                .map(this.mapper::toDto)
+                .collect(Collectors.toList());
+    }
+}
