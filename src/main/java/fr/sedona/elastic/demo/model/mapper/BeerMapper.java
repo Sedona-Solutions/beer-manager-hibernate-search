@@ -9,7 +9,9 @@ import org.mapstruct.Mapper;
 /**
  * Mapper interface for Beer/Brewery operations
  */
-@Mapper
+@Mapper(
+        config = QuarkusMapperConfig.class
+)
 public interface BeerMapper {
 
     BeerDTO toDto(BeerEntity entity);

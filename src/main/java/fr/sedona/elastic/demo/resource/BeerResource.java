@@ -2,6 +2,7 @@ package fr.sedona.elastic.demo.resource;
 
 import fr.sedona.elastic.demo.model.BeerEntity;
 import fr.sedona.elastic.demo.model.dto.BeerDTO;
+import fr.sedona.elastic.demo.model.mapper.BeerMapper;
 import fr.sedona.elastic.demo.repository.BeerRepository;
 import fr.sedona.elastic.demo.service.BeerSearchService;
 
@@ -12,33 +13,42 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Resource for beers
  */
-@Path("/beer")
+@Path("/beers")
 public class BeerResource {
 
-    private final BeerRepository beerRepository;
+    private BeerRepository beerRepository;
+    private BeerMapper beerMapper;
     private final BeerSearchService searchService;
 
     @Inject
-    public BeerResource(BeerRepository beerRepository, BeerSearchService searchService) {
+    public BeerResource(BeerRepository beerRepository,
+                        BeerMapper beerMapper,
+                        BeerSearchService searchService) {
         this.beerRepository = beerRepository;
+        this.beerMapper = beerMapper;
         this.searchService = searchService;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<BeerEntity> getBeers() {
-        return this.beerRepository.listAll();
+    public List<BeerDTO> getBeers() {
+        return this.beerRepository.listAll()
+                .stream().map(entity ->
+                        beerMapper.toDto(entity))
+                .collect(Collectors.toList()
+                );
     }
 
     @GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public BeerEntity getBeer(@PathParam("id") long id) {
-        return this.beerRepository.findById(id);
+    public BeerDTO getBeer(@PathParam("id") long id) {
+        return beerMapper.toDto(this.beerRepository.findById(id));
     }
 
     @GET

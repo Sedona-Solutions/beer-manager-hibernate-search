@@ -5,15 +5,13 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextFi
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Beer entity
  */
-@Entity(name="Beer")
+@Entity(name = "Beer")
 @Indexed
 public class BeerEntity extends PanacheEntity {
 
@@ -21,6 +19,10 @@ public class BeerEntity extends PanacheEntity {
     private String name;
 
     @ManyToOne
+    @JoinColumn(
+            name = "BREWERY_ID",
+            foreignKey = @ForeignKey(name = "FK_BEER_BREWERY")
+    )
     private BreweryEntity brewery;
 
     @ElementCollection

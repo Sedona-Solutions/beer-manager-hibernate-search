@@ -2,6 +2,8 @@ package fr.sedona.elastic.demo.model.dto;
 
 import fr.sedona.elastic.demo.model.BreweryType;
 
+import java.util.List;
+
 /**
  * Brewery DTO
  */
