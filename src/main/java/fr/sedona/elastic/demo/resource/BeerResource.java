@@ -1,7 +1,7 @@
 package fr.sedona.elastic.demo.resource;
 
-import fr.sedona.demo.model.BeerEntity;
-import fr.sedona.demo.repository.BeerRepository;
+import fr.sedona.elastic.demo.model.BeerEntity;
+import fr.sedona.elastic.demo.repository.BeerRepository;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -9,10 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import fr.sedona.elastic.demo.model.BeerEntity;
-import fr.sedona.elastic.demo.repository.BeerRepository;
-
 import java.util.List;
 
 /**
