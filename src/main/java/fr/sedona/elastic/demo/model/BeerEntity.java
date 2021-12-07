@@ -24,7 +24,7 @@ public class BeerEntity extends PanacheEntity {
     private BreweryEntity brewery;
 
     @ElementCollection
-    private List<String> flavors;
+    private List<String> ingredients;
 
     @GenericField
     private float alcoholLevel;
@@ -45,12 +45,12 @@ public class BeerEntity extends PanacheEntity {
         this.brewery = brewery;
     }
 
-    public List<String> getFlavors() {
-        return flavors;
+    public List<String> getIngredients() {
+        return ingredients;
     }
 
-    public void setFlavors(List<String> flavors) {
-        this.flavors = flavors;
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public float getAlcoholLevel() {

@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Test suite for BeerMapper
@@ -20,7 +20,7 @@ class BeerMapperTest {
     BeerMapper mapper;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         mapper = Mappers.getMapper(BeerMapper.class);
     }
 
@@ -33,7 +33,7 @@ class BeerMapperTest {
         brewery.setType(BreweryType.INDUSTRIAL);
         BeerEntity entity = new BeerEntity();
         entity.setName("name");
-        entity.setFlavors(List.of("Malt","Houblon"));
+        entity.setIngredients(List.of("Eau", "Malt", "Houblon"));
         entity.setAlcoholLevel(5.8f);
         entity.setBrewery(brewery);
 
@@ -43,7 +43,7 @@ class BeerMapperTest {
         // then
         assertEquals(entity.getName(), dto.getName());
         assertEquals(entity.getAlcoholLevel(), dto.getAlcoholLevel());
-        assertEquals(entity.getFlavors(), dto.getFlavors());
+        assertEquals(entity.getIngredients(), dto.getIngredients());
         assertEquals(brewery.id, dto.getBrewery().getId());
         assertEquals(brewery.getName(), dto.getBrewery().getName());
         assertEquals(brewery.getType(), dto.getBrewery().getType());

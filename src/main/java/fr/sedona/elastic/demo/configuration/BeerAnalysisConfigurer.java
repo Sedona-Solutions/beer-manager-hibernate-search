@@ -1,10 +1,10 @@
 package fr.sedona.elastic.demo.configuration;
 
-import org.hibernate.search.backend.elasticsearch.analysis.ElasticsearchAnalysisConfigurationContext;
-import org.hibernate.search.backend.elasticsearch.analysis.ElasticsearchAnalysisConfigurer;
-
 import javax.enterprise.context.Dependent;
 import javax.inject.Named;
+
+import org.hibernate.search.backend.elasticsearch.analysis.ElasticsearchAnalysisConfigurationContext;
+import org.hibernate.search.backend.elasticsearch.analysis.ElasticsearchAnalysisConfigurer;
 
 /**
  * Configurer for ES search indexes

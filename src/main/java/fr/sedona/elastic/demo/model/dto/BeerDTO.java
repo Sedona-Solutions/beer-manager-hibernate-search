@@ -10,7 +10,7 @@ public class BeerDTO {
     private long id;
     private String name;
     private float alcoholLevel;
-    private List<String> flavors;
+    private List<String> ingredients;
     private BreweryDTO brewery;
 
     public long getId() {
@@ -37,12 +37,12 @@ public class BeerDTO {
         this.alcoholLevel = alcoholLevel;
     }
 
-    public List<String> getFlavors() {
-        return flavors;
+    public List<String> getIngredients() {
+        return ingredients;
     }
 
-    public void setFlavors(List<String> flavors) {
-        this.flavors = flavors;
+    public void setIngredients(List<String> ingredients) {
+        this.ingredients = ingredients;
     }
 
     public BreweryDTO getBrewery() {

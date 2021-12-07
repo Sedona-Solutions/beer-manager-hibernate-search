@@ -3,7 +3,9 @@ package fr.sedona.elastic.demo.service.impl;
 import fr.sedona.elastic.demo.model.BreweryEntity;
 import fr.sedona.elastic.demo.model.dto.BreweryDTO;
 import fr.sedona.elastic.demo.model.mapper.BeerMapper;
+import fr.sedona.elastic.demo.search.dto.BrewerySearchParams;
 import fr.sedona.elastic.demo.service.BrewerySearchService;
+import org.hibernate.search.engine.search.predicate.dsl.BooleanPredicateClausesStep;
 import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.mapstruct.factory.Mappers;
 
@@ -32,6 +34,21 @@ public class BrewerySearchServiceImpl implements BrewerySearchService {
         return searchSession.search(BreweryEntity.class)
                 .where(f -> f.match().field("nameAutocomplete").matching(nameQuery))
                 .fetchHits(10)
+                .stream()
+                .map(this.mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BreweryDTO> search(BrewerySearchParams params) {
+        return searchSession.search(BreweryEntity.class).where(f -> {
+                    BooleanPredicateClausesStep<?> mainQuery = f.bool();
+                    String origin = params.getOrigin();
+                    if (origin != null) {
+                        mainQuery.must(f.match().field("origin").matching(origin));
+                    }
+                    return mainQuery;
+                }).fetchHits(10)
                 .stream()
                 .map(this.mapper::toDto)
                 .collect(Collectors.toList());

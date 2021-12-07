@@ -10,6 +10,7 @@ public class BreweryDTO {
     private long id;
     private String name;
     private BreweryType type;
+    private String country;
 
     public long getId() {
         return id;
@@ -33,5 +34,13 @@ public class BreweryDTO {
 
     public void setType(BreweryType type) {
         this.type = type;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
