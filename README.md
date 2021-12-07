@@ -1,3 +1,5 @@
+![Build status](https://github.com/github/docs/actions/workflows/main.yml/badge.svg)
+
 # beer-manager-hibernate-search Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
