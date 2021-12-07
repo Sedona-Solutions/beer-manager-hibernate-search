@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ step-3-autocomplete-brewery ]
+    branches: [ step-4-value-bridge ]
   pull_request:
-    branches: [ step-3-autocomplete-brewery ]
+    branches: [ step-4-value-bridge ]
 
 jobs:
   build:
