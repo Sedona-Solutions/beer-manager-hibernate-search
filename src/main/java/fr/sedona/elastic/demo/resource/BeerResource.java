@@ -15,7 +15,7 @@ import fr.sedona.elastic.demo.repository.BeerRepository;
 /**
  * Resource for beers
  */
-@Path("/beer")
+@Path("/beers")
 public class BeerResource {
 
     private BeerRepository beerRepository;
