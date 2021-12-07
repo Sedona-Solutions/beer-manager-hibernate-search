@@ -1,3 +1,5 @@
+[![Java CI with Maven](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/maven.yml/badge.svg?branch=step-3-autocomplete-brewery)](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/maven.yml)
+
 # beer-manager-hibernate-search Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
