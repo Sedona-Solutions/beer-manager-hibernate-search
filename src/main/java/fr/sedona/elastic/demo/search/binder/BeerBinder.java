@@ -1,7 +1,6 @@
 package fr.sedona.elastic.demo.search.binder;
 
 import fr.sedona.elastic.demo.model.BeerEntity;
-import fr.sedona.elastic.demo.model.BreweryEntity;
 import io.quarkus.arc.Unremovable;
 import org.hibernate.search.engine.backend.document.DocumentElement;
 import org.hibernate.search.engine.backend.document.IndexFieldReference;
@@ -36,7 +35,7 @@ public class BeerBinder implements PropertyBinder {
 
         context.bridge(List.class, new Bridge(
                 beersObjectField.toReference(),
-                beersObjectField.field("name", keywordType).multiValued().toReference())
+                beersObjectField.field("beerName", keywordType).multiValued().toReference())
         );
 
     }
@@ -57,9 +56,8 @@ public class BeerBinder implements PropertyBinder {
                 List bridgeElement,
                 PropertyBridgeWriteContext propertyBridgeWriteContext) {
             DocumentElement breweries = target.addObject(this.beersFieldRef);
-            bridgeElement.forEach(beerEntity -> {
-                        breweries.addValue(this.nameField, ((BeerEntity) beerEntity).getName());
-                    }
+            bridgeElement.forEach(beerEntity ->
+                    breweries.addValue(this.nameField, ((BeerEntity) beerEntity).getName())
             );
         }
     }

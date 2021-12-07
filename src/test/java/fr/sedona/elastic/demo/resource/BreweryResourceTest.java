@@ -15,7 +15,7 @@ class BreweryResourceTest {
     void autocomplete_should_return_breweries_starting_with_input() {
         given()
         .when()
-                .get("/brewery/autocomplete/carl")
+                .get("/breweries/autocomplete/carl")
         .then()
                 .statusCode(200)
                 .body("[0].id", is(4))
@@ -31,7 +31,7 @@ class BreweryResourceTest {
                 .contentType(ContentType.JSON)
                 .body(searchParams)
         .when()
-                .post("/brewery/search")
+                .post("/breweries/search")
         .then()
                 .statusCode(200)
                 .body("size()", is(1))

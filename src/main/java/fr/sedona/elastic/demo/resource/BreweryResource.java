@@ -1,5 +1,6 @@
 package fr.sedona.elastic.demo.resource;
 
+import com.google.gson.JsonObject;
 import fr.sedona.elastic.demo.model.dto.BreweryDTO;
 import fr.sedona.elastic.demo.search.dto.BrewerySearchParams;
 import fr.sedona.elastic.demo.service.BrewerySearchService;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Resource for breweries
  */
-@Path("/brewery")
+@Path("/breweries")
 @Produces(MediaType.APPLICATION_JSON)
 public class BreweryResource {
 
@@ -34,5 +35,12 @@ public class BreweryResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public List<BreweryDTO> search(BrewerySearchParams params) {
         return this.searchService.search(params);
+    }
+
+    @POST
+    @Path("search-json")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String searchJson(BrewerySearchParams params) {
+        return this.searchService.searchJson(params);
     }
 }
