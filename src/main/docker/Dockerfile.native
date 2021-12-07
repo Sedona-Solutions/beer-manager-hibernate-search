@@ -7,11 +7,11 @@
 #
 # Then, build the image with:
 #
-# docker build -f src/main/docker/Dockerfile.native -t quarkus/demo-hibernate-search .
+# docker build -f src/main/docker/Dockerfile.native -t quarkus/beer-manager-hibernate-search .
 #
 # Then run the container using:
 #
-# docker run -i --rm -p 8080:8080 quarkus/demo-hibernate-search
+# docker run -i --rm -p 8080:8080 quarkus/beer-manager-hibernate-search
 #
 ###
 FROM registry.access.redhat.com/ubi8/ubi-minimal:8.4
