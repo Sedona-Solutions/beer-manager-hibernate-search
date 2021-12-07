@@ -12,7 +12,7 @@ class BeerResourceTest {
     @Test
     void testGet() {
         given()
-                .when().get("/beer/1")
+                .when().get("/beers/1")
                 .then()
                 .statusCode(200)
                 .body("id", is(1))
@@ -24,7 +24,7 @@ class BeerResourceTest {
     @Test
     void testGetAll() {
         given()
-                .when().get("/beer")
+                .when().get("/beers")
                 .then()
                 .statusCode(200)
                 .body("size()", is(10));

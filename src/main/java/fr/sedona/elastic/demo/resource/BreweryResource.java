@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Resource for breweries
  */
-@Path("/brewery")
+@Path("/breweries")
 @Produces(MediaType.APPLICATION_JSON)
 public class BreweryResource {
 
