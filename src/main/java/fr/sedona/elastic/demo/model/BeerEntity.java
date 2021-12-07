@@ -1,19 +1,23 @@
 package fr.sedona.elastic.demo.model;
 
-import java.util.List;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.List;
 
 /**
  * Beer entity
  */
 @Entity(name="Beer")
+@Indexed
 public class BeerEntity extends PanacheEntity {
 
+    @FullTextField
     private String name;
 
     @ManyToOne
@@ -22,6 +26,7 @@ public class BeerEntity extends PanacheEntity {
     @ElementCollection
     private List<String> flavors;
 
+    @GenericField
     private float alcoholLevel;
 
     public String getName() {
