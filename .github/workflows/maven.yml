@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ step-1-add-hibernate-search ]
+    branches: [ step-2-add-search-service ]
   pull_request:
-    branches: [ step-1-add-hibernate-search ]
+    branches: [ step-2-add-search-service ]
 
 jobs:
   build:
