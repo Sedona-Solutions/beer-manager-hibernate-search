@@ -63,9 +63,11 @@ public class BrewerySearchServiceImpl implements BrewerySearchService {
                 .select(ElasticsearchSearchProjectionFactory::source)
                 .where(f -> {
                     BooleanPredicateClausesStep<?> mainQuery = f.bool();
-                    String origin = params.getOrigin();
-                    if (origin != null) {
-                        mainQuery.must(f.match().field("origin").matching(origin));
+                    if (params.getOrigin() != null) {
+                        mainQuery.must(f.match().field("origin").matching(params.getOrigin()));
+                    }
+                    if (params.getBeerName() != null) {
+                        mainQuery.must(f.match().field("beers.beerName").matching(params.getBeerName()));
                     }
                     return mainQuery;
                 }).fetch(10).responseBody().toString();
