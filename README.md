@@ -1,3 +1,5 @@
+![Build status](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/main.yml/badge.svg?branch=step-1-add-hibernate-search)
+
 # beer-manager-hibernate-search Project
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
