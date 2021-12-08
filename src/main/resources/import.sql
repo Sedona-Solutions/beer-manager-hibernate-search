@@ -10,7 +10,7 @@ INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (3, 'Ch''ti Blonde',
 INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (4, 'Skoll', 1, 6.0);
 INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (5, 'Tigre Bock', 1, 5.5);
 INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (6, 'Carlsberg', 4, 5.7);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (7, 'Elephant 1959', 4, 7.2);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (7, 'Elephant 1959', 5, 7.2);
 INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (8, 'Red is Dead', 5, 7.2);
 INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (9, 'Apocalypse Now', 5, 8.0);
 INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (10, 'Delicatessen', 5, 6.6);

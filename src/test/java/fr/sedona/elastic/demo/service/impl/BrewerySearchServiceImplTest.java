@@ -1,15 +1,17 @@
 package fr.sedona.elastic.demo.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.junit.jupiter.api.Test;
+
 import fr.sedona.elastic.demo.model.dto.BreweryDTO;
 import fr.sedona.elastic.demo.search.dto.BrewerySearchParams;
 import fr.sedona.elastic.demo.service.BrewerySearchService;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Test;
-
-import javax.inject.Inject;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test suite for {@link BrewerySearchServiceImpl}

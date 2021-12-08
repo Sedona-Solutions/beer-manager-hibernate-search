@@ -1,7 +1,9 @@
 package fr.sedona.elastic.demo.search.binder;
 
-import fr.sedona.elastic.demo.model.BeerEntity;
-import io.quarkus.arc.Unremovable;
+import java.util.List;
+
+import javax.enterprise.context.ApplicationScoped;
+
 import org.hibernate.search.engine.backend.document.DocumentElement;
 import org.hibernate.search.engine.backend.document.IndexFieldReference;
 import org.hibernate.search.engine.backend.document.IndexObjectFieldReference;
@@ -12,8 +14,8 @@ import org.hibernate.search.mapper.pojo.bridge.binding.PropertyBindingContext;
 import org.hibernate.search.mapper.pojo.bridge.mapping.programmatic.PropertyBinder;
 import org.hibernate.search.mapper.pojo.bridge.runtime.PropertyBridgeWriteContext;
 
-import javax.enterprise.context.ApplicationScoped;
-import java.util.List;
+import fr.sedona.elastic.demo.model.BeerEntity;
+import io.quarkus.arc.Unremovable;
 
 @ApplicationScoped
 @Unremovable
@@ -26,16 +28,15 @@ public class BeerBinder implements PropertyBinder {
         var beersObjectField = context.indexSchemaElement()
                 .objectField("beers");
 
-        var sortableType = context.typeFactory()
+        var sortableKeywordType = context.typeFactory()
                 .asString()
                 .aggregable(Aggregable.YES)
-                .sortable(Sortable.YES);
-        var keywordType = sortableType
+                .sortable(Sortable.YES)
                 .toIndexFieldType();
 
         context.bridge(List.class, new Bridge(
                 beersObjectField.toReference(),
-                beersObjectField.field("beerName", keywordType).multiValued().toReference())
+                beersObjectField.field("beerName", sortableKeywordType).multiValued().toReference())
         );
 
     }

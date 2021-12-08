@@ -1,18 +1,28 @@
 package fr.sedona.elastic.demo.model;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.TypeBinderRef;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.TypeBinding;
 
-import javax.persistence.*;
-import java.util.List;
+import fr.sedona.elastic.demo.search.binder.BeerFamilyBinder;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Beer entity
  */
 @Entity(name = "Beer")
 @Indexed
+@TypeBinding(binder = @TypeBinderRef(type = BeerFamilyBinder.class))
 public class BeerEntity extends PanacheEntity {
 
     @FullTextField
