@@ -17,6 +17,7 @@ import javax.persistence.Enumerated;
 public class BreweryEntity extends PanacheEntity {
 
     @FullTextField
+    @FullTextField(name = "nameAutocomplete", analyzer = "custom")
     private String name;
 
     @KeywordField
