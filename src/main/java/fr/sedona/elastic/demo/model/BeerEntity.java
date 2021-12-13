@@ -12,6 +12,7 @@ import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.TypeBinderRef;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.TypeBinding;
 
 import fr.sedona.elastic.demo.search.binder.BeerFamilyBinder;
@@ -33,6 +34,7 @@ public class BeerEntity extends PanacheEntity {
             name = "BREWERY_ID",
             foreignKey = @ForeignKey(name = "FK_BEER_BREWERY")
     )
+    @IndexedEmbedded
     private BreweryEntity brewery;
 
     @ElementCollection

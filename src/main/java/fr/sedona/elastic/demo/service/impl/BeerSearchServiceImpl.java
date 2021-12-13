@@ -1,12 +1,15 @@
 package fr.sedona.elastic.demo.service.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.hibernate.search.engine.search.aggregation.AggregationKey;
 import org.hibernate.search.engine.search.predicate.dsl.BooleanPredicateClausesStep;
+import org.hibernate.search.engine.search.query.SearchResult;
 import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.mapstruct.factory.Mappers;
 
@@ -66,5 +69,33 @@ public class BeerSearchServiceImpl implements BeerSearchService {
                 .stream()
                 .map(this.mapper::toDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Map<String,Long> aggregate(BeerSearchParams searchParams) {
+        AggregationKey<Map<String, Long>> beersByBrewery = AggregationKey.of("beers_by_brewery");
+
+        SearchResult<BeerEntity> result = searchSession.search(BeerEntity.class)
+                .where(f -> {
+                    BooleanPredicateClausesStep<?> mainQuery = f.bool();
+                    String name = searchParams.getName();
+                    String family = searchParams.getFamily();
+                    Float alcoholLowerBound = searchParams.getAlcoholLevelLowerBound();
+                    Float alcoholUpperBound = searchParams.getAlcoholLevelUpperBound();
+
+                    if (name != null && !name.isBlank()) {
+                        mainQuery.must(f.match().field("name").matching(name));
+                    }
+                    if (family != null && !family.isBlank()) {
+                        mainQuery.must(f.match().field("family").matching(family));
+                    }
+                    if (alcoholLowerBound != null || alcoholUpperBound != null) {
+                        mainQuery.filter(f.range().field("alcoholLevel").between(alcoholLowerBound, alcoholUpperBound));
+                    }
+                    return mainQuery;
+                })
+                .aggregation(beersByBrewery, f -> f.terms().field("brewery.nameAggregable", String  .class))
+                .fetch(10);
+        return result.aggregation(beersByBrewery);
     }
 }

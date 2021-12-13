@@ -63,4 +63,20 @@ class BeerResourceTest {
                 .body("[0].brewery.type", is("CRAFT"));
     }
 
+    @Test
+    void testAggregate() {
+        BeerSearchParams searchParams = new BeerSearchParams();
+        searchParams.setName("Elephant");
+        searchParams.setFamily("artisanale-forte");
+        searchParams.setAlcoholLevelLowerBound(7.0f);
+
+        given()
+                .body(searchParams)
+                .contentType(ContentType.JSON)
+                .when().post("/beers/aggregate")
+                .then()
+                .statusCode(200)
+                .body("Sainte-Cru", is(1));
+    }
+
 }

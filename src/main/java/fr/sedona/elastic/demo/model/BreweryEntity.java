@@ -1,8 +1,15 @@
 package fr.sedona.elastic.demo.model;
 
-import fr.sedona.elastic.demo.search.binder.BeerBinder;
-import fr.sedona.elastic.demo.search.OriginValueBridge;
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.OneToMany;
+
+import org.hibernate.search.engine.backend.types.Aggregable;
+import org.hibernate.search.engine.backend.types.Sortable;
 import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.PropertyBinderRef;
 import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.ValueBridgeRef;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
@@ -10,8 +17,9 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyBinding;
 
-import javax.persistence.*;
-import java.util.List;
+import fr.sedona.elastic.demo.search.OriginValueBridge;
+import fr.sedona.elastic.demo.search.binder.BeerBinder;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Brewery entity
@@ -22,6 +30,7 @@ public class BreweryEntity extends PanacheEntity {
 
     @FullTextField
     @FullTextField(name = "nameAutocomplete", analyzer = "custom")
+    @KeywordField(name = "nameAggregable", sortable = Sortable.YES, aggregable = Aggregable.YES)
     private String name;
 
     @KeywordField

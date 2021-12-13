@@ -2,6 +2,7 @@ package fr.sedona.elastic.demo.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import fr.sedona.elastic.demo.model.dto.BeerDTO;
 import fr.sedona.elastic.demo.search.dto.BeerSearchParams;
@@ -14,4 +15,6 @@ public interface BeerSearchService {
     List<BeerDTO> searchByName(String nameQuery);
 
     List<BeerDTO> search(BeerSearchParams searchParams);
+
+    Map<String,Long> aggregate(BeerSearchParams searchParams);
 }

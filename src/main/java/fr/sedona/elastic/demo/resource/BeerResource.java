@@ -1,6 +1,7 @@
 package fr.sedona.elastic.demo.resource;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -63,5 +64,12 @@ public class BeerResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public List<BeerDTO> searchBeersByName(BeerSearchParams searchParams) {
         return this.searchService.search(searchParams);
+    }
+
+    @POST
+    @Path("aggregate")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Map<String, Long> aggregateBeers(BeerSearchParams searchParams) {
+        return this.searchService.aggregate(searchParams);
     }
 }

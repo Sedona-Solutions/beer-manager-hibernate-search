@@ -3,6 +3,7 @@ package fr.sedona.elastic.demo.service.impl;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -151,5 +152,63 @@ class BeerSearchServiceImplTest {
         // then
         assertEquals(1, results.size());
         assertEquals("Elephant 1959", results.get(0).getName());
+    }
+
+    @Test
+    void aggregate_should_return_only_beers_with_selected_family_if_family_filter_set() {
+        // given
+        BeerSearchParams params = new BeerSearchParams();
+        params.setFamily("artisanale-forte");
+
+        // when
+        Map<String, Long> results = searchService.aggregate(params);
+
+        // then
+        assertEquals(1, results.size());
+        assertEquals(4,  results.get("Sainte-Cru"));
+    }
+
+    @Test
+    void aggregate_should_return_only_beers_with_alcohol_level_below_upper_bound_if_upper_bound_set() {
+        // given
+        BeerSearchParams params = new BeerSearchParams();
+        params.setAlcoholLevelUpperBound(6.0f);
+
+        // when
+        Map<String, Long> results = searchService.aggregate(params);
+
+        // then
+        assertEquals(3, results.size());
+        assertEquals(3,  results.get("Kronenbourg"));
+        assertEquals(1,  results.get("Carlsberg"));
+        assertEquals(1,  results.get("La Bière de la Rade"));
+    }
+
+    @Test
+    void aggregate_should_return_only_beers_with_alcohol_level_above_lower_bound_if_lower_bound_set() {
+        // given
+        BeerSearchParams params = new BeerSearchParams();
+        params.setAlcoholLevelLowerBound(7.0f);
+
+        // when
+        Map<String, Long> results = searchService.aggregate(params);
+
+        // then
+        assertEquals(1, results.size());
+        assertEquals(3,  results.get("Sainte-Cru"));
+    }
+
+    @Test
+    void aggregate_should_return_only_beers_with_name_matching_search_if_name_filter_set() {
+        // given
+        BeerSearchParams params = new BeerSearchParams();
+        params.setName("Elephant");
+
+        // when
+        Map<String, Long> results = searchService.aggregate(params);
+
+        // then
+        assertEquals(1, results.size());
+        assertEquals(1, results.get("Sainte-Cru"));
     }
 }
