@@ -24,6 +24,11 @@ public class BeerEntity extends PanacheEntity {
 
     private float alcoholLevel;
 
+    /**
+     * Id of user who added the beer, should be managed in another application
+     */
+    private long creatorId;
+
     public String getName() {
         return name;
     }
@@ -56,4 +61,11 @@ public class BeerEntity extends PanacheEntity {
         this.alcoholLevel = alcoholLevel;
     }
 
+    public long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
+    }
 }
