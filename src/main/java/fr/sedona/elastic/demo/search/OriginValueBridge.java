@@ -4,7 +4,7 @@ import org.hibernate.search.mapper.pojo.bridge.ValueBridge;
 import org.hibernate.search.mapper.pojo.bridge.runtime.ValueBridgeToIndexedValueContext;
 
 /**
- * Value Bridge used to convert ingredients to hasAllergen boolean
+ * Value Bridge used to convert country to a specific enum value
  */
 public class OriginValueBridge implements ValueBridge<String, String> {
 
@@ -16,6 +16,7 @@ public class OriginValueBridge implements ValueBridge<String, String> {
             case "Belgique":
             case "Allemagne":
             case "Espagne":
+            case "Danemark":
                 return "Europe";
             default:
                 return "Monde";
