@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -58,9 +57,14 @@ public class BeerResource {
         return this.searchService.searchByName(name);
     }
 
+    @GET
+    @Path("search/creator/{name}")
+    public List<BeerDTO> searchBeersByCreatorName(@PathParam("name") String name) {
+        return this.searchService.searchByCreatorName(name);
+    }
+
     @POST
     @Path("search")
-    @Consumes(MediaType.APPLICATION_JSON)
     public List<BeerDTO> searchBeersByName(BeerSearchParams searchParams) {
         return this.searchService.search(searchParams);
     }
