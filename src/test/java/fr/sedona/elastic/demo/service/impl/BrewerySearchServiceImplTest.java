@@ -38,7 +38,7 @@ class BrewerySearchServiceImplTest {
     void search_should_return_only_breweries_from_selected_origin_if_origin_filter_set() {
         // given
         BrewerySearchParams params = new BrewerySearchParams();
-        params.setOrigin("Monde");
+        params.setOrigin("Europe");
 
         // when
         List<BreweryDTO> results = searchService.search(params);

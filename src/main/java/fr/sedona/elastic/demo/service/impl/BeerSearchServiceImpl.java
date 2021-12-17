@@ -58,6 +58,25 @@ public class BeerSearchServiceImpl implements BeerSearchService {
     }
 
     @Override
+    public List<BeerDTO> searchByCreatorFirstNameAndLastName(String firstNameQuery, String lastNameQuery) {
+        return searchSession.search(BeerEntity.class)
+                .where(f -> {
+                    BooleanPredicateClausesStep<?> mainQuery = f.bool();
+                    if (firstNameQuery != null)  {
+                        mainQuery.must(f.match().field("creator.firstName").matching(firstNameQuery));
+                    }
+                    if (lastNameQuery != null)  {
+                        mainQuery.must(f.match().field("creator.lastName").matching(lastNameQuery));
+                    }
+                    return mainQuery;
+                })
+                .fetchHits(10)
+                .stream()
+                .map(this.mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<BeerDTO> search(BeerSearchParams searchParams) {
         return searchSession.search(BeerEntity.class)
                 .where(f -> {
