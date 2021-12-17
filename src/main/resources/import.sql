@@ -1,19 +1,23 @@
+INSERT INTO ExternalUser(id,lastName,firstName) VALUES (1, 'Lamotte', 'Edouard');
+INSERT INTO ExternalUser(id,lastName,firstName) VALUES (2, 'Cucchietti', 'Thomas');
+INSERT INTO ExternalUser(id,lastName,firstName) VALUES (3, 'Pilato', 'David');
+
 INSERT INTO Brewery(id, name, type, country) VALUES (1, 'Kronenbourg', 'INDUSTRIAL', 'France');
 INSERT INTO Brewery(id, name, type, country) VALUES (2, 'La Bière de la Rade', 'CRAFT', 'France');
 INSERT INTO Brewery(id, name, type, country) VALUES (3, 'Brasserie Castelain', 'INDUSTRIAL', 'France');
 INSERT INTO Brewery(id, name, type, country) VALUES (4, 'Carlsberg', 'INDUSTRIAL', 'Danemark');
 INSERT INTO Brewery(id, name, type, country) VALUES (5, 'Sainte-Cru', 'CRAFT', 'France');
 
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (1, '1664', 1, 5.5);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (2, 'Censurée', 2, 5.8);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (3, 'Ch''ti Blonde', 3, 6.4);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (4, 'Skoll', 1, 6.0);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (5, 'Tigre Bock', 1, 5.5);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (6, 'Carlsberg', 4, 5.7);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (7, 'Elephant 1959', 4, 7.2);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (8, 'Red is Dead', 5, 7.2);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (9, 'Apocalypse Now', 5, 8.0);
-INSERT INTO Beer(id, name, brewery_id, alcoholLevel) VALUES (10, 'Delicatessen', 5, 6.6);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (1, '1664', 1, 5.5, 1);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (2, 'Censurée', 2, 5.8, 2);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (3, 'Ch''ti Blonde', 3, 6.4, 3);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (4, 'Skoll', 1, 6.0, 1);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (5, 'Tigre Bock', 1, 5.5, 1);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (6, 'Carlsberg', 4, 5.7, 1);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (7, 'Elephant 1959', 4, 7.2, 2);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (8, 'Red is Dead', 5, 7.2, 2);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (9, 'Apocalypse Now', 5, 8.0, 3);
+INSERT INTO Beer(id, name, brewery_id, alcoholLevel, creatorId) VALUES (10, 'Delicatessen', 5, 6.6, 3);
 
 INSERT INTO Beer_Ingredients(Beer_id, ingredients) VALUES (1, 'Eau');
 INSERT INTO Beer_Ingredients(Beer_id, ingredients) VALUES (1, 'Malt d''orge');

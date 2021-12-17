@@ -1,12 +1,20 @@
 package fr.sedona.elastic.demo.model;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntity;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.ValueBridgeRef;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 
-import javax.persistence.*;
-import java.util.List;
+import fr.sedona.elastic.demo.search.CreatorFullNameValueBridge;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
  * Beer entity
@@ -30,6 +38,12 @@ public class BeerEntity extends PanacheEntity {
 
     @GenericField
     private float alcoholLevel;
+
+    /**
+     * Id of user who added the beer, should be managed in another application
+     */
+    @FullTextField(name="creatorFullName", valueBridge = @ValueBridgeRef(type = CreatorFullNameValueBridge.class))
+    private long creatorId;
 
     public String getName() {
         return name;
@@ -63,4 +77,11 @@ public class BeerEntity extends PanacheEntity {
         this.alcoholLevel = alcoholLevel;
     }
 
+    public long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
+    }
 }

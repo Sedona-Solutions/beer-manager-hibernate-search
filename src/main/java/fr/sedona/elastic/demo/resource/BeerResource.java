@@ -1,9 +1,7 @@
 package fr.sedona.elastic.demo.resource;
 
-import fr.sedona.elastic.demo.model.dto.BeerDTO;
-import fr.sedona.elastic.demo.model.mapper.BeerMapper;
-import fr.sedona.elastic.demo.repository.BeerRepository;
-import fr.sedona.elastic.demo.service.BeerSearchService;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -11,8 +9,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.List;
-import java.util.stream.Collectors;
+
+import fr.sedona.elastic.demo.model.dto.BeerDTO;
+import fr.sedona.elastic.demo.model.mapper.BeerMapper;
+import fr.sedona.elastic.demo.repository.BeerRepository;
+import fr.sedona.elastic.demo.service.BeerSearchService;
 
 /**
  * Resource for beers
@@ -37,8 +38,7 @@ public class BeerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<BeerDTO> getBeers() {
         return this.beerRepository.listAll()
-                .stream().map(entity ->
-                        beerMapper.toDto(entity))
+                .stream().map(beerMapper::toDto)
                 .collect(Collectors.toList()
                 );
     }
@@ -55,5 +55,12 @@ public class BeerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public List<BeerDTO> searchBeersByName(@PathParam("name") String name) {
         return this.searchService.searchByName(name);
+    }
+
+    @GET
+    @Path("search/creator/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<BeerDTO> searchBeersByCreatorName(@PathParam("name") String name) {
+        return this.searchService.searchByCreatorName(name);
     }
 }
