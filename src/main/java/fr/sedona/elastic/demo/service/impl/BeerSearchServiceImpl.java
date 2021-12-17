@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.hibernate.search.engine.search.common.ValueConvert;
+import org.hibernate.search.engine.search.predicate.dsl.BooleanPredicateClausesStep;
 import org.hibernate.search.mapper.orm.session.SearchSession;
 import org.mapstruct.factory.Mappers;
 
@@ -46,6 +47,25 @@ public class BeerSearchServiceImpl implements BeerSearchService {
         // as annotated type is a Long and query input is a string
         return searchSession.search(BeerEntity.class)
                 .where(f -> f.match().field("creatorFullName").matching(creatorNameQuery, ValueConvert.NO))
+                .fetchHits(10)
+                .stream()
+                .map(this.mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BeerDTO> searchByCreatorFirstNameAndLastName(String firstNameQuery, String lastNameQuery) {
+        return searchSession.search(BeerEntity.class)
+                .where(f -> {
+                    BooleanPredicateClausesStep<?> mainQuery = f.bool();
+                    if (firstNameQuery != null)  {
+                        mainQuery.must(f.match().field("creator.firstName").matching(firstNameQuery));
+                    }
+                    if (lastNameQuery != null)  {
+                        mainQuery.must(f.match().field("creator.lastName").matching(lastNameQuery));
+                    }
+                    return mainQuery;
+                })
                 .fetchHits(10)
                 .stream()
                 .map(this.mapper::toDto)

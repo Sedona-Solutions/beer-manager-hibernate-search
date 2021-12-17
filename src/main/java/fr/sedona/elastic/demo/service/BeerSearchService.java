@@ -13,4 +13,6 @@ public interface BeerSearchService {
     List<BeerDTO> searchByName(String nameQuery);
 
     List<BeerDTO> searchByCreatorName(String creatorNameQuery);
+
+    List<BeerDTO> searchByCreatorFirstNameAndLastName(String firstName, String lastName);
 }

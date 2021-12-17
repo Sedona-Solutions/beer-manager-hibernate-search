@@ -8,12 +8,15 @@ import javax.persistence.ForeignKey;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.PropertyBinderRef;
 import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.ValueBridgeRef;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
+import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyBinding;
 
 import fr.sedona.elastic.demo.search.CreatorFullNameValueBridge;
+import fr.sedona.elastic.demo.search.binder.CreatorBinder;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
@@ -42,7 +45,10 @@ public class BeerEntity extends PanacheEntity {
     /**
      * Id of user who added the beer, should be managed in another application
      */
+    // Annotation for ValueBridge
     @FullTextField(name="creatorFullName", valueBridge = @ValueBridgeRef(type = CreatorFullNameValueBridge.class))
+    // Annotation for PropertyBinder and PropertyBridge
+    @PropertyBinding(binder = @PropertyBinderRef(type = CreatorBinder.class))
     private long creatorId;
 
     public String getName() {
