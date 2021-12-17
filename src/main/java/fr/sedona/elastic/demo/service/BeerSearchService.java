@@ -14,6 +14,8 @@ public interface BeerSearchService {
 
     List<BeerDTO> searchByName(String nameQuery);
 
+    List<BeerDTO> searchByCreatorName(String creatorNameQuery);
+
     List<BeerDTO> search(BeerSearchParams searchParams);
 
     Map<String,Long> aggregate(BeerSearchParams searchParams);

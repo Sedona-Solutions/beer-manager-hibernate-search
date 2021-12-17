@@ -9,12 +9,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.TypeBinderRef;
+import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.ValueBridgeRef;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.FullTextField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.GenericField;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.Indexed;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.IndexedEmbedded;
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.TypeBinding;
 
+import fr.sedona.elastic.demo.search.CreatorFullNameValueBridge;
 import fr.sedona.elastic.demo.search.binder.BeerFamilyBinder;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
@@ -42,6 +44,12 @@ public class BeerEntity extends PanacheEntity {
 
     @GenericField
     private float alcoholLevel;
+
+    /**
+     * Id of user who added the beer, should be managed in another application
+     */
+    @FullTextField(name="creatorFullName", valueBridge = @ValueBridgeRef(type = CreatorFullNameValueBridge.class))
+    private long creatorId;
 
     public String getName() {
         return name;
@@ -75,4 +83,11 @@ public class BeerEntity extends PanacheEntity {
         this.alcoholLevel = alcoholLevel;
     }
 
+    public long getCreatorId() {
+        return creatorId;
+    }
+
+    public void setCreatorId(long creatorId) {
+        this.creatorId = creatorId;
+    }
 }
