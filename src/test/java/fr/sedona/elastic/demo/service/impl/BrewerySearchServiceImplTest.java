@@ -1,15 +1,17 @@
 package fr.sedona.elastic.demo.service.impl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.junit.jupiter.api.Test;
+
 import fr.sedona.elastic.demo.model.dto.BreweryDTO;
 import fr.sedona.elastic.demo.search.dto.BrewerySearchParams;
 import fr.sedona.elastic.demo.service.BrewerySearchService;
 import io.quarkus.test.junit.QuarkusTest;
-import org.junit.jupiter.api.Test;
-
-import javax.inject.Inject;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test suite for {@link BrewerySearchServiceImpl}
@@ -36,7 +38,7 @@ class BrewerySearchServiceImplTest {
     void search_should_return_only_breweries_from_selected_origin_if_origin_filter_set() {
         // given
         BrewerySearchParams params = new BrewerySearchParams();
-        params.setOrigin("Monde");
+        params.setOrigin("Europe");
 
         // when
         List<BreweryDTO> results = searchService.search(params);

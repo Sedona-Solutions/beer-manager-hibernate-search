@@ -1,18 +1,21 @@
 package fr.sedona.elastic.demo.service.impl;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
+
+import org.hibernate.search.engine.search.common.ValueConvert;
+import org.hibernate.search.engine.search.predicate.dsl.BooleanPredicateClausesStep;
+import org.hibernate.search.mapper.orm.session.SearchSession;
+import org.mapstruct.factory.Mappers;
+
 import fr.sedona.elastic.demo.model.BreweryEntity;
 import fr.sedona.elastic.demo.model.dto.BreweryDTO;
 import fr.sedona.elastic.demo.model.mapper.BeerMapper;
 import fr.sedona.elastic.demo.search.dto.BrewerySearchParams;
 import fr.sedona.elastic.demo.service.BrewerySearchService;
-import org.hibernate.search.engine.search.predicate.dsl.BooleanPredicateClausesStep;
-import org.hibernate.search.mapper.orm.session.SearchSession;
-import org.mapstruct.factory.Mappers;
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Default implementation of brewery search service
@@ -45,7 +48,7 @@ public class BrewerySearchServiceImpl implements BrewerySearchService {
                     BooleanPredicateClausesStep<?> mainQuery = f.bool();
                     String origin = params.getOrigin();
                     if (origin != null) {
-                        mainQuery.must(f.match().field("origin").matching(origin));
+                        mainQuery.must(f.match().field("origin").matching(origin, ValueConvert.NO));
                     }
                     return mainQuery;
                 }).fetchHits(10)
