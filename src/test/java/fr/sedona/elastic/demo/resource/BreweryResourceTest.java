@@ -1,12 +1,13 @@
 package fr.sedona.elastic.demo.resource;
 
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.is;
+
+import org.junit.jupiter.api.Test;
+
 import fr.sedona.elastic.demo.search.dto.BrewerySearchParams;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.Test;
-
-import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.is;
 
 @QuarkusTest
 class BreweryResourceTest {
@@ -25,7 +26,7 @@ class BreweryResourceTest {
     @Test
     void search_should_return_matching_breweries() {
         BrewerySearchParams searchParams = new BrewerySearchParams();
-        searchParams.setOrigin("Monde");
+        searchParams.setOrigin("Europe");
 
         given()
                 .contentType(ContentType.JSON)
