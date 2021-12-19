@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ step-5-property-binder ]
+    branches: [ step-6-type-binder ]
   pull_request:
-    branches: [ step-5-property-binder ]
+    branches: [ step-6-type-binder ]
 
 jobs:
   build:

@@ -1,4 +1,4 @@
-[![Java CI with Maven](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/maven.yml/badge.svg?branch=step-5-property-binder)](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/maven.yml)
+[![Java CI with Maven](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/maven.yml/badge.svg?branch=step-6-type-binder)](https://github.com/Sedona-Solutions/beer-manager-hibernate-search/actions/workflows/maven.yml)
 
 # beer-manager-hibernate-search Project
 
