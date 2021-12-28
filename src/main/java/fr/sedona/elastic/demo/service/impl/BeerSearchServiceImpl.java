@@ -8,6 +8,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.hibernate.search.engine.search.aggregation.AggregationKey;
+import org.hibernate.search.engine.search.common.ValueConvert;
 import org.hibernate.search.engine.search.predicate.dsl.BooleanPredicateClausesStep;
 import org.hibernate.search.engine.search.query.SearchResult;
 import org.hibernate.search.mapper.orm.session.SearchSession;
@@ -38,6 +39,37 @@ public class BeerSearchServiceImpl implements BeerSearchService {
     public List<BeerDTO> searchByName(String nameQuery) {
         return searchSession.search(BeerEntity.class)
                 .where(f -> f.match().field("name").matching(nameQuery))
+                .fetchHits(10)
+                .stream()
+                .map(this.mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BeerDTO> searchByCreatorName(String creatorNameQuery) {
+        // ValueConvert must be set to NO or a classcastexception will be thrown
+        // as annotated type is a Long and query input is a string
+        return searchSession.search(BeerEntity.class)
+                .where(f -> f.match().field("creatorFullName").matching(creatorNameQuery, ValueConvert.NO))
+                .fetchHits(10)
+                .stream()
+                .map(this.mapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<BeerDTO> searchByCreatorFirstNameAndLastName(String firstNameQuery, String lastNameQuery) {
+        return searchSession.search(BeerEntity.class)
+                .where(f -> {
+                    BooleanPredicateClausesStep<?> mainQuery = f.bool();
+                    if (firstNameQuery != null)  {
+                        mainQuery.must(f.match().field("creator.firstName").matching(firstNameQuery));
+                    }
+                    if (lastNameQuery != null)  {
+                        mainQuery.must(f.match().field("creator.lastName").matching(lastNameQuery));
+                    }
+                    return mainQuery;
+                })
                 .fetchHits(10)
                 .stream()
                 .map(this.mapper::toDto)

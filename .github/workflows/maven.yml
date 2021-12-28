@@ -5,9 +5,9 @@ name: Java CI with Maven
 
 on:
   push:
-    branches: [ step-5-property-binder ]
+    branches: [ step-7-aggregations ]
   pull_request:
-    branches: [ step-5-property-binder ]
+    branches: [ step-7-aggregations ]
 
 jobs:
   build:

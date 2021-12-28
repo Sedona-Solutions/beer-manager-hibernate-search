@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import fr.sedona.elastic.demo.model.dto.BeerDTO;
@@ -59,16 +59,26 @@ public class BeerResource {
         return this.searchService.searchByName(name);
     }
 
+    @GET
+    @Path("search/creator/{name}")
+    public List<BeerDTO> searchBeersByCreatorName(@PathParam("name") String name) {
+        return this.searchService.searchByCreatorName(name);
+    }
+
+    @GET
+    @Path("search/creator")
+    public List<BeerDTO> searchBeersByCreatorFirstNameAndLastName(@QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
+        return this.searchService.searchByCreatorFirstNameAndLastName(firstName, lastName);
+    }
+
     @POST
     @Path("search")
-    @Consumes(MediaType.APPLICATION_JSON)
     public List<BeerDTO> searchBeersByName(BeerSearchParams searchParams) {
         return this.searchService.search(searchParams);
     }
 
     @POST
     @Path("aggregate")
-    @Consumes(MediaType.APPLICATION_JSON)
     public Map<String, Long> aggregateBeers(BeerSearchParams searchParams) {
         return this.searchService.aggregate(searchParams);
     }
