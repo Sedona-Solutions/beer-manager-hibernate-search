@@ -52,6 +52,9 @@ public class BrewerySearchServiceImpl implements BrewerySearchService {
             if (origin != null) {
                 mainQuery.must(f.match().field("origin").matching(origin, ValueConvert.NO));
             }
+            if (params.getBeerName() != null) {
+                mainQuery.must(f.match().field("beers.beerName").matching(params.getBeerName()));
+            }
             return mainQuery;
         }).fetchHits(10)
                 .stream()
