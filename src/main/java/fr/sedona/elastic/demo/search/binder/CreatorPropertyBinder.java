@@ -20,12 +20,12 @@ import io.quarkus.arc.Unremovable;
  */
 @ApplicationScoped
 @Unremovable
-public class CreatorBinder implements PropertyBinder {
+public class CreatorPropertyBinder implements PropertyBinder {
 
     private final ExternalUserRepository userRepository;
 
     @Inject
-    public CreatorBinder(ExternalUserRepository userRepository) {
+    public CreatorPropertyBinder(ExternalUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

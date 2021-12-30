@@ -15,7 +15,7 @@ import fr.sedona.elastic.demo.model.BreweryType;
 /**
  * Type binder used to compute family field value for beers
  */
-public class BeerFamilyBinder implements TypeBinder {
+public class BeerFamilyTypeBinder implements TypeBinder {
 
     @Override
     public void bind(TypeBindingContext context) {
@@ -34,7 +34,7 @@ public class BeerFamilyBinder implements TypeBinder {
                 .field("family", sortableKeywordType)
                 .toReference();
 
-        context.bridge(BeerEntity.class, new BeerFamilyBinder.BeerFamilyBridge(familyFieldRef));
+        context.bridge(BeerEntity.class, new BeerFamilyTypeBinder.BeerFamilyBridge(familyFieldRef));
     }
 
     private static class BeerFamilyBridge implements TypeBridge<BeerEntity> {

@@ -1,6 +1,6 @@
 package fr.sedona.elastic.demo.model;
 
-import fr.sedona.elastic.demo.search.binder.BeerBinder;
+import fr.sedona.elastic.demo.search.binder.BeerPropertyBinder;
 import fr.sedona.elastic.demo.search.OriginValueBridge;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import org.hibernate.search.mapper.pojo.bridge.mapping.annotation.PropertyBinderRef;
@@ -33,7 +33,7 @@ public class BreweryEntity extends PanacheEntity {
     private String country;
 
     @OneToMany(mappedBy = "brewery", fetch = FetchType.EAGER)
-    @PropertyBinding(binder = @PropertyBinderRef(type = BeerBinder.class))
+    @PropertyBinding(binder = @PropertyBinderRef(type = BeerPropertyBinder.class))
     private List<BeerEntity> beers;
 
     public String getName() {
