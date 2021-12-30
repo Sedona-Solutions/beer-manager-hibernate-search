@@ -18,7 +18,7 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.KeywordFie
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyBinding;
 
 import fr.sedona.elastic.demo.search.OriginValueBridge;
-import fr.sedona.elastic.demo.search.binder.BeerBinder;
+import fr.sedona.elastic.demo.search.binder.BeerPropertyBinder;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
@@ -42,7 +42,7 @@ public class BreweryEntity extends PanacheEntity {
     private String country;
 
     @OneToMany(mappedBy = "brewery", fetch = FetchType.EAGER)
-    @PropertyBinding(binder = @PropertyBinderRef(type = BeerBinder.class))
+    @PropertyBinding(binder = @PropertyBinderRef(type = BeerPropertyBinder.class))
     private List<BeerEntity> beers;
 
     public String getName() {

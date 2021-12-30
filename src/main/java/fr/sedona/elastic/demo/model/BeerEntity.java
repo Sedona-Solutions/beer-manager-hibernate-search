@@ -19,8 +19,8 @@ import org.hibernate.search.mapper.pojo.mapping.definition.annotation.PropertyBi
 import org.hibernate.search.mapper.pojo.mapping.definition.annotation.TypeBinding;
 
 import fr.sedona.elastic.demo.search.CreatorFullNameValueBridge;
-import fr.sedona.elastic.demo.search.binder.BeerFamilyBinder;
-import fr.sedona.elastic.demo.search.binder.CreatorBinder;
+import fr.sedona.elastic.demo.search.binder.BeerFamilyTypeBinder;
+import fr.sedona.elastic.demo.search.binder.CreatorPropertyBinder;
 import io.quarkus.hibernate.orm.panache.PanacheEntity;
 
 /**
@@ -28,7 +28,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
  */
 @Entity(name = "Beer")
 @Indexed
-@TypeBinding(binder = @TypeBinderRef(type = BeerFamilyBinder.class))
+@TypeBinding(binder = @TypeBinderRef(type = BeerFamilyTypeBinder.class))
 public class BeerEntity extends PanacheEntity {
 
     @FullTextField
@@ -54,7 +54,7 @@ public class BeerEntity extends PanacheEntity {
     // Annotation for ValueBridge
     @FullTextField(name="creatorFullName", valueBridge = @ValueBridgeRef(type = CreatorFullNameValueBridge.class))
     // Annotation for PropertyBinder and PropertyBridge
-    @PropertyBinding(binder = @PropertyBinderRef(type = CreatorBinder.class))
+    @PropertyBinding(binder = @PropertyBinderRef(type = CreatorPropertyBinder.class))
     private long creatorId;
 
     public String getName() {

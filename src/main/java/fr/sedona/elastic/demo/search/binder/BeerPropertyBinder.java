@@ -19,7 +19,7 @@ import io.quarkus.arc.Unremovable;
 
 @ApplicationScoped
 @Unremovable
-public class BeerBinder implements PropertyBinder {
+public class BeerPropertyBinder implements PropertyBinder {
 
     @Override
     public void bind(PropertyBindingContext context) {
