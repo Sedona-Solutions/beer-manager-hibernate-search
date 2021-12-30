@@ -1,7 +1,9 @@
 package fr.sedona.elastic.demo.resource;
 
 import fr.sedona.elastic.demo.model.BeerEntity;
+import fr.sedona.elastic.demo.model.dto.BeerDTO;
 import fr.sedona.elastic.demo.repository.BeerRepository;
+import fr.sedona.elastic.demo.service.BeerSearchService;
 
 import javax.inject.Inject;
 import javax.ws.rs.GET;
@@ -19,9 +21,12 @@ public class BeerResource {
 
     private BeerRepository beerRepository;
 
+    private BeerSearchService beerSearchService;
+
     @Inject
-    public BeerResource(BeerRepository beerRepository) {
+    public BeerResource(BeerRepository beerRepository, BeerSearchService beerSearchService) {
         this.beerRepository = beerRepository;
+        this.beerSearchService = beerSearchService;
     }
 
     @GET
@@ -35,5 +40,12 @@ public class BeerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public BeerEntity getBeer(@PathParam("id") long id) {
         return this.beerRepository.findById(id);
+    }
+
+    @GET
+    @Path("search/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<BeerDTO> searchBeer(@PathParam("name") String name) {
+        return this.beerSearchService.searchByName(name);
     }
 }
