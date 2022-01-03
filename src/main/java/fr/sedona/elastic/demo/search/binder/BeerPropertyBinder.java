@@ -11,6 +11,8 @@ import org.hibernate.search.mapper.pojo.bridge.PropertyBridge;
 import org.hibernate.search.mapper.pojo.bridge.binding.PropertyBindingContext;
 import org.hibernate.search.mapper.pojo.bridge.mapping.programmatic.PropertyBinder;
 import org.hibernate.search.mapper.pojo.bridge.runtime.PropertyBridgeWriteContext;
+import org.hibernate.search.mapper.pojo.extractor.builtin.BuiltinContainerExtractors;
+import org.hibernate.search.mapper.pojo.extractor.mapping.programmatic.ContainerExtractorPath;
 
 import javax.enterprise.context.ApplicationScoped;
 import java.util.List;
@@ -21,7 +23,9 @@ public class BeerPropertyBinder implements PropertyBinder {
 
     @Override
     public void bind(PropertyBindingContext context) {
-        context.dependencies().use("id");
+        context.dependencies()
+                .use(ContainerExtractorPath.explicitExtractor(BuiltinContainerExtractors.COLLECTION),
+                        "name");
 
         var beersObjectField = context.indexSchemaElement()
                 .objectField("beers");
