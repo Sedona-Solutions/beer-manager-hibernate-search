@@ -36,7 +36,8 @@ public class CreatorPropertyBinder implements PropertyBinder {
         // mapping type definition are made here
         var textType = context.typeFactory()
                 .asString()
-                .analyzer("standard")
+                .analyzer("custom")
+                .searchAnalyzer("standard")
                 .toIndexFieldType();
 
         var keywordType = context.typeFactory()

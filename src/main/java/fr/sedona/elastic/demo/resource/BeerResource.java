@@ -1,23 +1,21 @@
 package fr.sedona.elastic.demo.resource;
 
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.inject.Inject;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
-
+import fr.sedona.elastic.demo.model.BeerEntity;
 import fr.sedona.elastic.demo.model.dto.BeerDTO;
 import fr.sedona.elastic.demo.model.mapper.BeerMapper;
 import fr.sedona.elastic.demo.repository.BeerRepository;
 import fr.sedona.elastic.demo.search.dto.BeerSearchParams;
 import fr.sedona.elastic.demo.service.BeerSearchService;
+import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
+
+import javax.inject.Inject;
+import javax.transaction.Transactional;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Resource for beers
@@ -81,5 +79,14 @@ public class BeerResource {
     @Path("aggregate")
     public Map<String, Long> aggregateBeers(BeerSearchParams searchParams) {
         return this.searchService.aggregate(searchParams);
+    }
+
+    @PATCH
+    @Path("{id}")
+    @Transactional
+    public Response updateBeerName(@PathParam("id") Long id, @RequestBody String name) {
+        BeerEntity beer = beerRepository.findById(id);
+        beer.setName(name);
+        return Response.ok().build();
     }
 }
